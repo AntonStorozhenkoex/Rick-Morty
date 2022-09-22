@@ -21,6 +21,7 @@ export const GET_CHARACTER_BY_FILTERS = gql`
         species
         type
         gender
+        image
         location {
           name
         }

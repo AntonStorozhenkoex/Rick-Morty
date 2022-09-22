@@ -9,6 +9,8 @@ import {
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./theme/theme";
 
 const client = new ApolloClient({
   link: createHttpLink({ uri: "https://rickandmortyapi.com/graphql/" }),
@@ -19,9 +21,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
     </ApolloProvider>
   </React.StrictMode>
 );
