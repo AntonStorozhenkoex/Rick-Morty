@@ -4,6 +4,7 @@ export const theme = createTheme({
   palette: {
     cardBgColor: "#0C7D85",
     cardBorderColor: "#CAE26A",
+    notResultColor:'#fff'
   },
   components: {
     MuiSelect: {
@@ -15,7 +16,7 @@ export const theme = createTheme({
           background: "#407772",
           borderRadius: 7,
           border: "none",
-          color: "white",
+          color: "#fff",
         },
       },
     },
@@ -27,7 +28,7 @@ export const theme = createTheme({
         root: {
           background: "#407772",
           borderRadius: 7,
-          color: "white",
+          color: "#fff",
         },
       },
     },
@@ -37,7 +38,7 @@ export const theme = createTheme({
       },
       styleOverrides: {
         root: {
-          color: "white",
+          color: "#fff",
         },
       },
     },

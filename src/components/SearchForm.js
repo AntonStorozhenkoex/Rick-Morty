@@ -4,6 +4,7 @@ import { makeStyles } from "@mui/styles";
 import { Field } from "formik";
 import { genders, species, status } from "../data";
 import { TextField, Select } from "formik-mui";
+import {SearchButton} from "./SearchButton";
 
 const useStyles = makeStyles(() => ({
   select: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export const SearchForm = () => {
+export const SearchForm = ({handleSubmit}) => {
   const classes = useStyles();
 
   return (
@@ -24,6 +25,7 @@ export const SearchForm = () => {
         name="type"
         placeholder="Character type"
         sx={{ width: "50%", padding: 1 }}
+        InputProps={{endAdornment: <SearchButton func={handleSubmit}/>}}
       />
       <Grid container justifyContent="space-between" sx={{ width: "51%" }}>
         <Field name="status" component={Select} className={classes.select}>
