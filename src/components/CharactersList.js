@@ -2,48 +2,39 @@ import React from "react";
 import { CharacterCard } from "./CharacterCard";
 import { makeStyles } from "@mui/styles";
 import { CircularProgress, Grid } from "@mui/material";
-import { NotResult } from "./NotResult";
+import { NotResults } from "./NotResults";
 
 const useStyles = makeStyles(() => ({
-  container: {
-    width: "80%",
-    paddingTop: 20,
-  },
+    container: {
+        width: "80%",
+        paddingTop: 20
+    }
 }));
 
 export const CharactersList = ({ data, loading }) => {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  if (loading)
+    if (loading)
+        return (
+            <Grid container justifyContent="center" sx={{ paddingTop: 25 }}>
+                <CircularProgress />
+            </Grid>
+        );
+
+    if (data?.length === 0) {
+        return <NotResults />;
+    }
+
     return (
-      <Grid container justifyContent="center" sx={{ paddingTop: 25 }}>
-        <CircularProgress />
-      </Grid>
+        <Grid
+            container
+            className={classes.container}
+            justifyContent="flex-start"
+            sx={{ width: "1500px", margin: "0 auto" }}
+        >
+            {data?.map((item) => (
+                <CharacterCard key={item.id} item={item} />
+            ))}
+        </Grid>
     );
-
-  if (data?.length === 0) {
-    return <NotResult />;
-  }
-
-  return (
-    <Grid
-      container
-      className={classes.container}
-      justifyContent="flex-start"
-      sx={{ width: "1500px", margin: "0 auto" }}
-    >
-      {data?.map((item) => (
-        <CharacterCard
-          key={item.id}
-          name={item.name}
-          gender={item.gender}
-          image={item.image}
-          location={item.location.name}
-          status={item.status}
-          species={item.species}
-          episode={"0"}
-        />
-      ))}
-    </Grid>
-  );
 };
