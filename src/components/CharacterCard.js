@@ -13,6 +13,10 @@ const useStyles = makeStyles((theme) => ({
     margin: "10px",
     padding: "10px",
   },
+  title: {
+    width: "100%",
+    textAlign: "center",
+  },
   image: {
     borderRadius: "50%",
     width: 150,
@@ -34,9 +38,7 @@ export const CharacterCard = ({
   return (
     <Grid container justifyContent="center" className={classes.card}>
       <img src={image} alt={name} className={classes.image} />
-      <Typography sx={{ width: "100%", textAlign: "center" }}>
-        {name}
-      </Typography>
+      <Typography className={classes.title}>{name}</Typography>
       <Grid container justifyContent="space-between">
         <p>{`Status: ${status}`}</p>
         <p>{`Species: ${species}`}</p>

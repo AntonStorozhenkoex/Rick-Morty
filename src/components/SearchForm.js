@@ -1,10 +1,13 @@
-import React from "react";
-import { Grid, MenuItem } from "@mui/material";
+import React, { useCallback, useEffect } from "react";
+import { debounce, Grid, MenuItem } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Field } from "formik";
+import { Field, useFormikContext } from "formik";
 import { genders, species, status } from "../data";
 import { TextField, Select } from "formik-mui";
-import {SearchButton} from "./SearchButton";
+import { SearchButton } from "./SearchButton";
+import { useSearchParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { StringParam } from "use-query-params";
 
 const useStyles = makeStyles(() => ({
   select: {
@@ -15,8 +18,22 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export const SearchForm = ({handleSubmit}) => {
+export const SearchForm = ({ setSearchParams }) => {
   const classes = useStyles();
+
+  const { values, handleSubmit } = useFormikContext();
+
+  const onSubmit = useCallback(debounce(handleSubmit, 3000), []);
+
+  useEffect(() => {
+    onSubmit();
+    setSearchParams({
+      gender: values.gender,
+      type: values.type,
+      status: values.status,
+      species: values.species,
+    });
+  }, [values]);
 
   return (
     <Grid container justifyContent="center">
@@ -25,7 +42,6 @@ export const SearchForm = ({handleSubmit}) => {
         name="type"
         placeholder="Character type"
         sx={{ width: "50%", padding: 1 }}
-        InputProps={{endAdornment: <SearchButton func={handleSubmit}/>}}
       />
       <Grid container justifyContent="space-between" sx={{ width: "51%" }}>
         <Field name="status" component={Select} className={classes.select}>
